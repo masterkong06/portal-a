@@ -13,19 +13,17 @@ function App() {
   return (
     <Router>
       <div className="container">
+        <h1>Healthi Patient Portal</h1>
         <nav className=" navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="http://#" target="_blank" rel="noreferrer">
             <img src={Logo} width="25" height="25" alt="Healthi Patient Portal" /> {/*can use this sytax for logo as it was imported like the other components*/}
           </a>
           <Link to="/" className="navbar-brand">Registrations</Link>
-          <Link to="/new-visit" className="nav-link">New Visit</Link>
+          <Link to="/create" className="nav-link">New Visit</Link>
         </nav>
-
-
-        <h1>Healthi Patient Portal</h1>
         <Route path="/" exact component={Register} /> {/* at this path load the Register component to show a list of all patients */}
         <Route path="/edit-pt/:id" component={EditPatient} /> {/* at this path load the EditPatient component to show and edit the data of one patient */}
-        <Route path="/new-visit" component={CreatePatient} /> {/* at this path load the CreateVisit component to create a new pateint */}
+        <Route path="/create" component={CreatePatient} /> {/* at this path load the CreateVisit component to create a new pateint */}
         <Route path="/view-pt" component={PatientRecord} /> {/* at this path load the PatientRecord component to view a patient's record */}
       </div>
     </Router>

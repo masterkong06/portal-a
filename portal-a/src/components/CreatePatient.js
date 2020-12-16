@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreatePatient extends Component {
 
@@ -38,6 +39,22 @@ export default class CreatePatient extends Component {
         ${this.state.email},
         ${this.state.date}
         `)
+
+        // create a new object to collect values from the submited form
+        const newPatient ={
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            phone: this.state.phone,
+            email: this.state.email,
+            date: this.state.date,
+        }
+
+        axios.post('http://localhost:3003/portal/create', newPatient)
+            .then(res => console.log(res.data));
 
 
         this.setState({
@@ -104,7 +121,6 @@ export default class CreatePatient extends Component {
                     <input type='date' className="form-control" id='date' name='date' onChange={this.handleChange} value={this.state.date} placeholder="Enter date"></input>
                 </div>
                 <div className="form-group"><input type='submit' className=" btn btn-primary" value='Add Patient'></input></div>
-
                 </form>
             </div>
         )
