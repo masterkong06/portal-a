@@ -24,6 +24,8 @@ export default class EditPatient extends Component {
         this.setState({ [event.target.id]: event.target.value });
     }
 
+    
+
     handleSubmit(event){
         event.preventDefault();
 
@@ -40,7 +42,7 @@ export default class EditPatient extends Component {
             date: this.state.date,
         }
 
-        axios.post('http://localhost:3003/portal//edit/'+this.props.match.params.id, editedPatient)
+        axios.post('http://localhost:3003/portal/edit/'+this.props.match.params.id, editedPatient)
             .then(res => console.log(res.data));
 
             this.props.history.push('/') // Return user to index route. React router history object. https://reactrouter.com/core/api/history

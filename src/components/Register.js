@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PatientList from './PatientList';
 
 
 // function to render each record
@@ -17,7 +18,7 @@ const Registered = props => ( // functional component in arrow syntax. functiona
         <td>{props.demographic.date_created}</td>
         <td>
             <Link to={"/edit-pt/"+props.demographic._id}>EDIT</Link>
-            <Link to={"/remove/"+props.demographic._id}>DELETE</Link>
+            <Link onClick={()=>this.handleDelete(props.demographic._id)}>DELETE</Link>
         </td>
     </tr>
     
@@ -27,7 +28,11 @@ const Registered = props => ( // functional component in arrow syntax. functiona
 export default class Register extends Component {
     constructor(props) {
         super(props);
-        this.state = {demographic: []};
+        this.state = {
+            demographic: []
+        };
+        this.handleDelete = this.handleDelete.bind(this);
+
     }
 
     componentDidMount(){
@@ -44,6 +49,18 @@ export default class Register extends Component {
         return this.state.demographic.map((registeredList, i) => {
             return < Registered demographic={registeredList} key={i} />; //return the "Registered" component and pass demographic and key props
         });
+    }
+
+    handleDelete(id) {
+        axios.post('http://localhost:3003/portal/remove/'+this.props.match.params.id)
+            .then(res => {
+                const findIndex = this.state.demographic.findIndex(demographic => demographic._id === id)
+                const copyDemographics = [...this.state.demographic]
+                copyDemographics.splice(findIndex, 1)
+                this.setState({demographic: copyDemographics})
+
+            });
+            this.props.history.push('/') 
     }
 
 
@@ -68,6 +85,7 @@ export default class Register extends Component {
                     </thead>
                     <tbody>
                         { this.registeredPatients() }
+                        {/* <PatientList handleDelete={this.handleDelete}></PatientList> */}
                     </tbody>
                 </table>
             </div>
