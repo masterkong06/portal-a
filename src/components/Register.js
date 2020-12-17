@@ -17,9 +17,9 @@ const Registered = props => ( // functional component in arrow syntax. functiona
         <td>{props.demographic.date_created}</td>
         <td>
             <Link to={"/edit-pt/"+props.demographic._id}>EDIT</Link>
-            <Link to={"/remove/"+props.demographic._id}>DELETE</Link>
+            <button onClick={() => props.handleDelete(props.demographic._id)} >DELETE</button>
         </td>
-    </tr>
+    </tr>         
     
     )
     
@@ -28,9 +28,15 @@ export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {demographic: []};
+        this.getRecords = this.getRecords.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount(){
+        this.getRecords()
+    }
+
+    getRecords(){
         axios.get('http://localhost:3003/portal')
         .then(res =>{
             this.setState({demographic: res.data});
@@ -40,9 +46,16 @@ export default class Register extends Component {
         })
     }
 
+    handleDelete(id){
+        axios.delete('http://localhost:3003/portal/remove/'+id)
+        .then(res => {
+            this.getRecords();
+        })
+    }
+
     registeredPatients() {
         return this.state.demographic.map((registeredList, i) => {
-            return < Registered demographic={registeredList} key={i} />; //return the "Registered" component and pass demographic and key props
+            return < Registered demographic={registeredList} key={i} handleDelete={this.handleDelete}/>; //return the "Registered" component and pass demographic and key props
         });
     }
 
