@@ -1,10 +1,9 @@
 {
   "name": "portal-a",
   "version": "0.1.0",
+  "description": "",
+  "main": "App.js",
   "private": true,
-  "engines": {
-    "node": "14.15.1"
-  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
