@@ -18,11 +18,7 @@ const Registered = props => ( // functional component in arrow syntax. functiona
         <td>{props.demographic.date_created}</td>
         <td>
             <Link to={"/edit-pt/"+props.demographic._id}>EDIT</Link>
-<<<<<<< HEAD
-            <Link onClick={()=>this.handleDelete(props.demographic._id)}>DELETE</Link>
-=======
             <button onClick={() => props.handleDelete(props.demographic._id)} >DELETE</button>
->>>>>>> 744d6c7bd62f720f7e1657d6863338b4270caa02
         </td>
     </tr>         
     
@@ -63,19 +59,6 @@ export default class Register extends Component {
             return < Registered demographic={registeredList} key={i} handleDelete={this.handleDelete}/>; //return the "Registered" component and pass demographic and key props
         });
     }
-
-    handleDelete(id) {
-        axios.post('http://localhost:3003/portal/remove/'+this.props.match.params.id)
-            .then(res => {
-                const findIndex = this.state.demographic.findIndex(demographic => demographic._id === id)
-                const copyDemographics = [...this.state.demographic]
-                copyDemographics.splice(findIndex, 1)
-                this.setState({demographic: copyDemographics})
-
-            });
-            this.props.history.push('/') 
-    }
-
 
     render() {
         return (
