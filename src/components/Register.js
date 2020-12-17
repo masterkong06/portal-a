@@ -6,7 +6,8 @@ import PatientList from './PatientList';
 
 // function to render each record
 const Registered = props => ( // functional component in arrow syntax. functional components are used to display html. They are "stateless".
-    <tr>
+    <tr>  {/*when I click on the table row go to PatientRecord.js and display person's information and recent test results*/}
+        <td><button className="btn btn-primary">View</button></td>
         <td>{props.demographic.firstName}</td>
         <td>{props.demographic.lastName}</td>
         <td>{props.demographic.address}</td>
@@ -46,6 +47,14 @@ export default class Register extends Component {
             console.log(error);
         })
     }
+
+    handleView(id){
+        axios.get('http://localhost:3003/portal/'+id)
+        .then(res => {
+            
+        })
+    }
+
 
     handleDelete(id){
         axios.delete('http://localhost:3003/portal/remove/'+id)

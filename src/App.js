@@ -24,7 +24,7 @@ function App() {
         <Route path="/" exact component={Register} /> {/* at this path load the Register component to show a list of all patients */}
         <Route path="/edit-pt/:id" component={EditPatient} /> {/* at this path load the EditPatient component to show and edit the data of one patient */}
         <Route path="/create" component={CreatePatient} /> {/* at this path load the CreateVisit component to create a new pateint */}
-        <Route path="/view-pt" component={PatientRecord} /> {/* at this path load the PatientRecord component to view a patient's record */}
+        <Route path="/view" component={PatientRecord} /> {/* at this path load the PatientRecord component to view a patient's record */}
       </div>
     </Router>
   );
