@@ -7,6 +7,7 @@ import CreatePatient from './components/CreatePatient';
 import PatientRecord from './components/PatientRecord'
 
 import Logo from "./images/healthi-logo.jpg";
+import LoginButton from './components/LoginButton';
 
 
 function App() {
@@ -20,11 +21,12 @@ function App() {
           </a>
           <Link to="/" className="navbar-brand">Registrations</Link>
           <Link to="/create" className="nav-link">New Visit</Link>
+          <LoginButton />
         </nav>
         <Route path="/" exact component={Register} /> {/* at this path load the Register component to show a list of all patients */}
         <Route path="/edit-pt/:id" component={EditPatient} /> {/* at this path load the EditPatient component to show and edit the data of one patient */}
         <Route path="/create" component={CreatePatient} /> {/* at this path load the CreateVisit component to create a new pateint */}
-        <Route path="/view-pt" component={PatientRecord} /> {/* at this path load the PatientRecord component to view a patient's record */}
+        <Route path="/view" component={PatientRecord} /> {/* at this path load the PatientRecord component to view a patient's record */}
       </div>
     </Router>
   );
